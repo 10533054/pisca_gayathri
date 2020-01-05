@@ -1,1 +1,36 @@
 
+<html>
+    <select id= "current">
+        <option>Currently booked apartments</option>
+        <option>Get Most Frequently Booked apartment</option>
+        <option>Apartment order by price</option>
+    </select>
+    <div id="table">
+    </div>
+    <script>
+
+function loadList(url,id){
+
+var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == XMLHttpRequest.DONE) {  
+       if (xmlhttp.status == 200) {
+        document.getElementById(id).innerHTML =  createList(JSON.parse(xmlhttp.responseText));
+       }
+       else if (xmlhttp.status == 400) {
+          alert('There was an error 400');
+       }
+       else {
+           alert('something else other than 200 was returned');
+       }
+    }
+};
+
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+}
+
+    </script>
+</html>
